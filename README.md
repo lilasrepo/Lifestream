@@ -1,41 +1,54 @@
-﻿# Lifestream
-Lifestream is a plugin that helps with navigation between data centers, worlds, instances, residential areas. Visit another world, data center or house with just a single command.
-## Become a Supporter!
-If you like Lifestream, please consider becoming a supporter on Patreon or via other means! This will help me to continue updating Lifestream and work on new plugins and features and you will receive benefits such as early progress updates, priority support, prioritized feature requests, early testing builds and private tools. 
-- [Subscribe on Patreon (Starts from $1)](https://subscribe.nightmarexiv.org/) - eligible for Discord role
-- [Donate Litecoin, Bitcoin, Tether or other crypto](https://crypto.nightmarexiv.org/) - eligible for Discord role
-- [One-time donation on Ko-Fi](https://donate.nightmarexiv.org/)
+# Lifestream（繁中移植版 · TC12） / Traditional-Chinese Port
 
-### Also:
-- [Explore other plugins I maintain or contributed to](https://explore.nightmarexiv.org/)
-- [Join NightmareXIV Discord server to receive fast support and pings about plugin updates](https://discord.gg/BeeRFKDJD3)
-## Key features
-- Visit another world with one command, even if on another data center
-- One-click to travel between aetherytes
-- Quickly switch between area instances
-- Use shortcuts to go to your home, fc house, apartment, grand company, market board
-- Create address books where you can store residential addresses of your friends or venues and go there at any time with one click
+> 加速以太網（Aethernet）移動與跨服切換。<br>
+> Speeds up Aethernet travel and World visiting.
 
-## Optional dependencies
-- [vnavmesh](https://github.com/awgil/ffxiv_navmesh) from `https://puni.sh/api/repository/veyn` for pathing to your grand company automatically
-## This plugin is in development
-This means that there are still features that I would like to implement in future or features that I would like to enhance, as well as that I'm accepting suggestions and feature requests.
-## Installation
-1. Install [FFXIVQuickLauncher](https://github.com/goatcorp/FFXIVQuickLauncher?tab=readme-ov-file#xivlauncher-----) and enable Dalamud in it's settings. You have to run the game through FFXIVQuickLauncher in order for any of these plugins to work.
-2. Open Dalamud settings by typing `/xlsettings` in game chat.
-3. Go to "Experimental" tab.
-4. Find "Custom Plugin Repositories" section, agree with listed terms if needed and paste the following link into text input field: `https://github.com/NightmareXIV/MyDalamudPlugins/raw/main/pluginmaster.json`
-5. Click "Save" button.
+**繁體中文**：這是 **[Lifestream](https://github.com/NightmareXIV/Lifestream)** 的繁體中文客戶端移植版，對應 **FFXIV 7.1 / yanmucorp Dalamud API12（.NET 9）**。本專案僅做相容性移植，**非官方、非原作維護**；所有原始功能與設計著作權歸原作者 **NightmareXIV**。
 
-You should now have NightmareXIV plugins available in your plugin installer. <br>
-Open plugin installer by typing `/xlplugins` in game chat, go to "Available plugins" section and search for a plugin you would like to install.
+**English**: A Traditional-Chinese-client port of **[Lifestream](https://github.com/NightmareXIV/Lifestream)** targeting **FFXIV 7.1 / yanmucorp Dalamud API12 (.NET 9)**. Compatibility port only — **unofficial and not maintained by the original author**. All original work © **NightmareXIV**.
 
-![image](https://github.com/NightmareXIV/MyDalamudPlugins/blob/main/meta/install/installer.png?raw=true)
+---
 
-## Support
-Join NightmareXIV Discord server to receive support for this plugin: https://discord.gg/m8NRt4X8Gf
-[![](https://dcbadge.vercel.app/api/server/m8NRt4X8Gf)](https://discord.gg/m8NRt4X8Gf)
+## 這是什麼 / About
 
-The server operates on a ticket-based system. Please create a ticket and describe your issue.
-Additionally, you may create an issue in the repository. Reply time for tickets may be significantly longer than on Discord, however, the issue does not have any risks to be lost.
-(Basically, if you want to report a critical bug or receive help, prefer Discord, if you want to suggest feature or report non-critical bug, prefer Github)
+一鍵傳送到任一伺服器或以太網目的地，也可直接點擊區域地圖上的以太之光分流前往。
+
+One click to teleport to any World or aethernet destination, and click aetheryte shards on the zone map to travel to them.
+
+## 安裝 / Installation
+
+**繁體中文**
+1. 使用 **XIVTCLauncher** 啟動繁體中文客戶端。
+2. 遊戲內輸入 `/xlsettings` → 切到 **Experimental** 分頁 → **Custom Plugin Repositories（自訂插件庫）**。
+3. 貼上下列網址並按 **+** 儲存：
+   ```
+   https://raw.githubusercontent.com/lilasrepo/DalamudPlugins/main/pluginmaster.json
+   ```
+4. 輸入 `/xlplugins`，搜尋 **Lifestream (TC12)** → 安裝 → 啟用。
+
+**English**
+1. Launch the Traditional-Chinese client with **XIVTCLauncher**.
+2. In-game, type `/xlsettings` → **Experimental** tab → **Custom Plugin Repositories**.
+3. Add this URL and save with **+**:
+   ```
+   https://raw.githubusercontent.com/lilasrepo/DalamudPlugins/main/pluginmaster.json
+   ```
+4. Type `/xlplugins`, search **Lifestream (TC12)** → Install → Enable.
+
+## 對應版本 / Compatibility
+
+| 項目 / Item | 版本 / Version |
+|---|---|
+| 遊戲 / Game | FFXIV 7.1（繁中客戶端 / TC client） |
+| Dalamud | yanmucorp API12（.NET 9） |
+| 移植自上游 / Ported from upstream | v2.5.4.9 |
+
+## 原作與授權 / Credits & License
+
+本專案 fork 自 **[NightmareXIV/Lifestream](https://github.com/NightmareXIV/Lifestream)**，授權沿用上游；所有原始功能著作權歸 **NightmareXIV**。<br>
+Forked from **[NightmareXIV/Lifestream](https://github.com/NightmareXIV/Lifestream)**. License follows upstream; all original work © **NightmareXIV**.
+
+## 免責聲明 / Disclaimer
+
+第三方插件，使用風險自負。**移植相關問題請回報到本 repo 的 Issues，請勿打擾上游原作者。**<br>
+Third-party plugin — use at your own risk. **For port-specific issues please open an Issue here; do not contact the upstream author.**
