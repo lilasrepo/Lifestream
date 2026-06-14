@@ -1,4 +1,4 @@
-﻿using ECommons.Configuration;
+using ECommons.Configuration;
 using ECommons.ExcelServices;
 using ECommons.GameHelpers;
 using FFXIVClientStructs.FFXIV.Client.UI;
@@ -343,7 +343,7 @@ internal static unsafe class UISettings
                 fixed(int* ptr = &C.ButtonWidthArray[0])
                 fixed(byte* sptr = "Button left/right padding\0"u8)
                 {
-                    ImGuiNative.InputInt3(sptr, ptr, ImGuiInputTextFlags.None);
+                    ImGuiNative.igInputInt3(sptr, ptr, ImGuiInputTextFlags.None); // API12 ImGui.NET uses igInputInt3
                 }
                 ImGui.SetNextItemWidth(100f.Scale());
                 ImGui.InputInt("Aetheryte button top/bottom padding", ref C.ButtonHeightAetheryte);

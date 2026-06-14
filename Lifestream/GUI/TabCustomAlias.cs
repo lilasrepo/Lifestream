@@ -1,4 +1,4 @@
-﻿using ECommons.Configuration;
+using ECommons.Configuration;
 using ECommons.ExcelServices;
 using ECommons.GameHelpers;
 using ECommons.ImGuiMethods.TerritorySelection;
@@ -372,7 +372,7 @@ public static class TabCustomAlias
                 ImGuiEx.Text($"Copy territory requirement:\n{ExcelTerritoryHelper.GetName(command.Territory)}");
                 ImGuiEx.TextV("Up or down until command number:");
                 ImGui.SetNextItemWidth(150f.Scale());
-                ImGuiEx.FilteringInputInt("##cmdNum", out var cmdNum);
+                int cmdNum = 0; ImGui.InputInt("##cmdNum", ref cmdNum); // API12: ImGuiEx.FilteringInputInt walk-back gap
                 ImGui.SameLine();
                 if(ImGui.Button("OK"))
                 {
@@ -563,7 +563,7 @@ public static class TabCustomAlias
             {
                 command.DataID = Svc.Targets.Target.DataId;
             }
-            ImGuiEx.InputFloat(100f, "Approach before interacting to this distance", ref command.InteractDistance, 1, 1);
+            { ImGui.SetNextItemWidth(100f); var _id = command.InteractDistance ?? 0f; if(ImGui.InputFloat("Approach before interacting to this distance", ref _id, 1, 1)) command.InteractDistance = _id; } // API12: ImGuiEx.InputFloat walk-back gap; nullable unwrap
         }
         if(command.Kind == CustomAliasKind.Mount_Up)
         {
@@ -604,7 +604,8 @@ public static class TabCustomAlias
                     command.SelectOption.Add("");
                 }
             }
-            ImGuiEx.Checkbox("Excel text comparison option: only first", ref command.ExcelOnlyFirst);
+            // porting-note: walk-back ECommons ImGuiEx.Checkbox takes ref int; use Dalamud ImGui.Checkbox (ref bool)
+            ImGui.Checkbox("Excel text comparison option: only first", ref command.ExcelOnlyFirst);
         }
 
         if(command.Kind.Equals(CustomAliasKind.Close_UI))

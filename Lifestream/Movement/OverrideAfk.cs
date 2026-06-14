@@ -1,4 +1,4 @@
-﻿using ECommons.CSExtensions;
+// using ECommons.CSExtensions; // walk-back ECommons: namespace not present
 using FFXIVClientStructs.FFXIV.Client.UI;
 using System;
 using System.Collections.Generic;

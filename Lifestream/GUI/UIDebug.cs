@@ -1,4 +1,4 @@
-﻿using Dalamud.Game;
+using Dalamud.Game;
 using Dalamud.Memory;
 using Dalamud.Plugin.Ipc.Exceptions;
 using Dalamud.Utility;
@@ -9,7 +9,7 @@ using ECommons.ExcelServices;
 using ECommons.EzSharedDataManager;
 using ECommons.GameFunctions;
 using ECommons.GameHelpers;
-using ECommons.IPC;
+// using ECommons.IPC; // API12: ECommons.IPC package not in build
 using ECommons.MathHelpers;
 using ECommons.Reflection;
 using ECommons.Throttlers;
@@ -349,39 +349,24 @@ internal static unsafe class UIDebug
         {
             ImGuiEx.Text($"""
                 Available {Player.Available}
-                CastActionId {Player.Object.CastInfo.ActionId}
+                CastActionId {Player.BattleChara->CastInfo.ActionId}
                 IsOccupied {IsOccupied()}
                 IsTargetable {Player.Object.IsTargetable}
                 BattleChara->CastInfo.ActionId {Player.BattleChara->CastInfo.ActionId}
                 StatusId: {Player.Object.StatusList.Select(x => x.StatusId).Print()}
                 GetStatusManager: {(nint)Player.Character->GetStatusManager():X}
                 IsCasting: {Player.Object.IsCasting()}
-                IsCasting2: {Player.Object.IsCasting(5, ActionType.Action)}
+                IsCasting2: {Player.Object.IsCasting(5, (uint)ActionType.Action)}
                 GetCastInfo: {(nint)Player.Character->GetCastInfo()}
                 GetCastInfo: {MemoryHelper.ReadRaw((nint)Player.Character->GetCastInfo(), sizeof(CastInfo)).ToHexString()}
                 ActionId: {(nint)Player.Character->GetCastInfo()->ActionId}
                 ActionType: {(nint)Player.Character->GetCastInfo()->ActionType}
                 """);
         }
-        if(ImGui.CollapsingHeader("Address book ipc test"))
+        // API12: ECommonsIPC.Lifestream.* requires ECommons.IPC package which we dropped — debug UI omitted
+        if(false && ImGui.CollapsingHeader("Address book ipc test"))
         {
-            if(ImGui.CollapsingHeader("Addresses"))
-            {
-                ImGuiEx.Text($"{ECommonsIPC.Lifestream.GetAddressBookEntries()?.Print("\n")}");
-            }
-            if(ImGui.CollapsingHeader("Addresses with folders"))
-            {
-                foreach(var x in ECommonsIPC.Lifestream.GetAddressBookEntriesWithFolders())
-                {
-                    ImGuiEx.Text($"{x.Key}");
-                    ImGui.Indent();
-                    foreach(var e in x.Value)
-                    {
-                        ImGuiEx.Text($"{e}");
-                    }
-                    ImGui.Unindent();
-                }
-            }
+            // TODO(api12): re-enable if a local IPC self-loopback is desired
         }
         if(ImGui.CollapsingHeader("World test"))
         {
@@ -400,7 +385,7 @@ internal static unsafe class UIDebug
                     }
                 }
                 ImGuiEx.Text($"Public worlds:");
-                ImGuiEx.Text(Lumina.Excel.Sheets.World.Values.Where(x => x.IsPublic()).Select(x => $"{x.RowId} {x.Name} {x.Region} {x.UserType}").Print("\n"));
+                ImGuiEx.Text(Svc.Data.GetExcelSheet<Lumina.Excel.Sheets.World>()!.Where(x => x.IsPublic()).Select(x => $"{x.RowId} {x.Name} {x.Region} {x.UserType}").Print("\n"));
             }
             catch(Exception e)
             {
@@ -411,7 +396,7 @@ internal static unsafe class UIDebug
         {
             if(ThreadLoadImageHandler.TryGetTextureWrap("https://github.com/FFXIV-CombatReborn/RotationSolverReborn/blob/main/Images/Logo.png?raw=true", out var tex))
             {
-                ImGui.Image(tex.Handle, new(-1));
+                ImGui.Image(tex.ImGuiHandle, new(-1));
             }
         }
         if(ImGui.CollapsingHeader("IPC test - travel from chara select screen"))
@@ -567,8 +552,8 @@ internal static unsafe class UIDebug
             {
                 var pname = TerritoryInfo.Instance()->AreaPlaceNameId;
                 var pname2 = TerritoryInfo.Instance()->SubAreaPlaceNameId;
-                var placeNames = PlaceName.Values.Where(x => x.Name.GetText() == PlaceName.GetRef(pname).ValueNullable?.Name.GetText());
-                var placeNames2 = PlaceName.Values.Where(x => x.Name.GetText() == PlaceName.GetRef(pname2).ValueNullable?.Name.GetText());
+                var placeNames = Svc.Data.GetExcelSheet<PlaceName>()!.Where(x => x.Name.GetText() == Svc.Data.GetExcelSheet<PlaceName>()!.GetRowOrDefault(pname)?.Name.GetText());
+                var placeNames2 = Svc.Data.GetExcelSheet<PlaceName>()!.Where(x => x.Name.GetText() == Svc.Data.GetExcelSheet<PlaceName>()!.GetRowOrDefault(pname2)?.Name.GetText());
                 Copy($"""
                     new(new({Svc.Targets.Target.Position.X:F1}f, {Svc.Targets.Target.Position.Z:F1}f), {P.Territory}, GetPlaceName({pname}), Base), //{Svc.Data.GetExcelSheet<PlaceName>().GetRowOrDefault(pname)?.Name.GetText()} ({placeNames.Select(x => x.RowId).Print()}), {Svc.Data.GetExcelSheet<PlaceName>().GetRowOrDefault(pname2)?.Name.GetText()} ({placeNames2.Select(x => x.RowId).Print()}), 
                     """);
@@ -679,7 +664,7 @@ internal static unsafe class UIDebug
                 if(ThreadLoadImageHandler.TryGetIconTextureWrap(marker.IconId, false, out var w))
                 {
                     ImGui.SameLine();
-                    ImGui.Image(w.Handle, new(30f));
+                    ImGui.Image(w.ImGuiHandle, new(30f));
                 }
             }
         }

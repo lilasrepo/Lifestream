@@ -1,4 +1,4 @@
-﻿using ECommons.GameFunctions;
+using ECommons.GameFunctions;
 using ECommons.GameHelpers;
 using ECommons.Throttlers;
 using FFXIVClientStructs.FFXIV.Client.Game;
@@ -38,7 +38,7 @@ public unsafe class TeleportService
     public bool ReliableTeleportToAetheryte(uint id, uint sub = 0, bool wait = false)
     {
         if(!Player.Interactable) return false;
-        if(Player.Object.IsCasting(5, ActionType.Action))
+        if(Player.Object.IsCasting(5, (uint)ActionType.Action))
         {
             if(wait)
             {

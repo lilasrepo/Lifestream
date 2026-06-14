@@ -1,6 +1,6 @@
-﻿using Dalamud.Hooking;
+using Dalamud.Hooking;
 using Dalamud.Utility.Signatures;
-using ECommons.CSExtensions;
+// using ECommons.CSExtensions; // walk-back ECommons: namespace not present
 using ECommons.EzHookManager;
 using ECommons.MathHelpers;
 using FFXIVClientStructs.FFXIV.Component.GUI;
@@ -20,7 +20,9 @@ public unsafe class Memory : IDisposable
     [Signature("48 89 5C 24 ?? 48 89 74 24 ?? 57 48 83 EC 20 8B DA 41 0F B6 F0", DetourName = nameof(AtkComponentTreeList_vf31Detour), Fallibility = Fallibility.Fallible)]
     internal Hook<AtkComponentTreeList_vf31> AtkComponentTreeList_vf31Hook;
 
-    [Signature("4C 8D 0D ?? ?? ?? ?? 44 0F B7 41", ScanType = ScanType.StaticAddress, Fallibility = Fallibility.Fallible)]
+    // C-fix: game 7.5 sig "4C 8D 0D ?? ?? ?? ?? 44 0F B7 41" doesn't match TC 7.1 binary;
+    // walk back to game 7.1 sig (from JP/Lifestream commit 5bfa38c "7.1")
+    [Signature("4C 8D 0D ?? ?? ?? ?? 4C 8B 11 48 8B D9", ScanType = ScanType.StaticAddress, Fallibility = Fallibility.Fallible)]
     internal int* MaxInstances;
 
     internal delegate byte OpenPartyFinderInfoDelegate(void* agentLfg, ulong contentId);

@@ -27,7 +27,8 @@ public unsafe class OverrideCamera : IDisposable
     public Angle SpeedV = 360.Degrees(); // per second
 
     private delegate void RMICameraDelegate(CameraEx* self, int inputMode, float speedH, float speedV);
-    [Signature("48 8B C4 53 48 81 EC ?? ?? ?? ?? 44 0F 29 50 ??")]
+    // C-fix: game 7.5 sig drifted; walk back to game 7.1 sig (from JP/Lifestream 5bfa38c "7.1")
+    [Signature("40 53 48 83 EC 70 44 0F 29 44 24 ?? 48 8B D9")]
     private Hook<RMICameraDelegate> _rmiCameraHook = null!;
 
     public OverrideCamera()

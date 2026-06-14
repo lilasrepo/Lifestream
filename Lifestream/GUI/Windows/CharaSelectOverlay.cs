@@ -1,4 +1,4 @@
-﻿using ECommons.ExcelServices;
+using ECommons.ExcelServices;
 using ECommons.SimpleGui;
 using ECommons.UIHelpers.AddonMasterImplementations;
 using Lifestream.Systems;
@@ -57,7 +57,7 @@ public unsafe class CharaSelectOverlay : EzOverlayWindow
             {
                 ImGui.Checkbox("Do not log in after transfer", ref NoLogin);
             });
-            var datacenters = worlds.Select(x => x.DataCenter).DistinctBy(x => x.RowId).OrderBy(x => x.Value.Region.RowId).ToArray();
+            var datacenters = worlds.Select(x => x.DataCenter).DistinctBy(x => x.RowId).OrderBy(x => x.Value.Region).ToArray();
             if(ImGui.BeginTable("LifestreamSelectWorld", datacenters.Length, ImGuiTableFlags.SizingFixedFit | ImGuiTableFlags.BordersV | ImGuiTableFlags.BordersOuter | ImGuiTableFlags.NoSavedSettings))
             {
                 foreach(var dc in datacenters)

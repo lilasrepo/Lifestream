@@ -91,13 +91,8 @@ internal static unsafe class TaskChangeWorld
             {
                 WorldVisitRand = Random.Shared.Next(0, C.RetryWorldVisitIntervalDelta * 1000);
                 P.TaskManager.BeginStack();
-                P.TaskManager.Enqueue(() =>
-                {
-                    var agent = AgentWorldTravel.Instance();
-                    if(agent->HomeWorldId == null) return true;
-                    PluginLog.Verbose($"HomeWorldId: {(nint)agent->HomeWorldId:X16}, timer: {agent->GetFoP<uint>("QueueTimer1").Reinterpret<uint, float>()}");
-                    return false;
-                }, new(abortOnTimeout: false, timeLimitMS: 20000));
+                // TODO(api12): AgentWorldTravel (FFXIVClientStructs Agent) is API15/game-7.5 only; not in API12 CS.
+                //   Skip the pre-wait-for-world-travel-agent step; TaskChangeWorld below still performs the change.
                 TaskChangeWorld.Enqueue(targetWorld);
                 P.TaskManager.InsertStack();
                 return true;

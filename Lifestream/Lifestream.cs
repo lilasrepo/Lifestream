@@ -1,4 +1,4 @@
-﻿using AutoRetainerAPI;
+using AutoRetainerAPI;
 using Dalamud.Game.Gui.Dtr;
 using ECommons.Automation;
 using ECommons.Automation.NeoTaskManager;
@@ -80,7 +80,9 @@ public unsafe class Lifestream : IDalamudPlugin
 #endif
         new TickScheduler(delegate
         {
-            DalamudReflector.SetImGuiAssertsState();
+            // API12: Dalamud.Configuration.Internal.DalamudConfiguration / InterfaceManager
+            // don't expose ImGuiAssertsEnabledAtStartup — call NREs internally. Disable.
+            // DalamudReflector.SetImGuiAssertsState();
             TerritoryWatcher.Initialize();
             Config = EzConfig.Init<Config>();
             Utils.CheckConfigMigration();
@@ -712,8 +714,8 @@ public unsafe class Lifestream : IDalamudPlugin
                 return;
             }
 
-            var addon = component->OwnerAddon;
-            if(addon == null) addon = component->ContainingAddon2;
+            // API12: AtkComponentTextInput.OwnerAddon is game-7.5-only; use only ContainingAddon2
+            var addon = component->ContainingAddon2;
             if(addon == null || addon->NameString != "ChatLog")
             {
                 if(S.SearchHelperOverlay.IsOpen)
@@ -723,7 +725,7 @@ public unsafe class Lifestream : IDalamudPlugin
                 return;
             }
 
-            var currentText = component->EvaluatedString.ToString();
+            var currentText = ""; // TODO(api12): AtkComponentTextInput.EvaluatedString is game-7.5-only; /li search helper disabled
 
             if(currentText.StartsWith("/li", StringComparison.OrdinalIgnoreCase))
             {

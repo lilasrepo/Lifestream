@@ -1,5 +1,5 @@
-﻿using Dalamud.Memory;
-using NetworkMessageDirection = ECommons.DalamudServices.Legacy.NetworkMessageDirection;
+using Dalamud.Memory;
+using NetworkMessageDirection = Dalamud.Game.Network.NetworkMessageDirection;
 
 namespace Lifestream.Services;
 public unsafe class NetworkDebugger : IDisposable

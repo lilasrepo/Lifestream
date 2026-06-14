@@ -1,4 +1,4 @@
-﻿using Dalamud.Game.ClientState.Objects.Types;
+using Dalamud.Game.ClientState.Objects.Types;
 using ECommons.Automation;
 using ECommons.GameFunctions;
 using ECommons.GameHelpers;
@@ -218,7 +218,7 @@ internal static unsafe class WorldChange
     internal static bool? WaitUntilNotBusy()
     {
         if(!Player.Available) return false;
-        return S.Data.DataStore.Territories.Contains(P.Territory) && Player.Object.CastInfo.ActionId == 0 && !IsOccupied() && !Utils.IsDisallowedToUseAethernet() && Player.Object.IsTargetable;
+        return S.Data.DataStore.Territories.Contains(P.Territory) && Player.BattleChara->CastInfo.ActionId == 0 && !IsOccupied() && !Utils.IsDisallowedToUseAethernet() && Player.Object.IsTargetable;
     }
 
 

@@ -1,4 +1,4 @@
-﻿using ECommons.Configuration;
+using ECommons.Configuration;
 using ECommons.ExcelServices;
 using ECommons.GameHelpers;
 using Lifestream.Data;
@@ -151,7 +151,7 @@ public class PaissaImporter
                     }
                     if(entry.Alias != "")
                     {
-                        ImGui.MenuItem($"Enable Alias: {entry.Alias}", ref entry.AliasEnabled);
+                        ImGui.MenuItem($"Enable Alias: {entry.Alias}", "", ref entry.AliasEnabled);
                     }
                     if(ImGui.MenuItem("Edit..."))
                     {

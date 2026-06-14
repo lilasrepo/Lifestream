@@ -1,4 +1,4 @@
-﻿using Dalamud.Game.Gui.Dtr;
+using Dalamud.Game.Gui.Dtr;
 using Dalamud.Game.Text.SeStringHandling;
 using ECommons.EzEventManager;
 
@@ -29,7 +29,7 @@ public class DtrManager : IDisposable
 
     public void Refresh() => OnTerritoryChanged(Svc.ClientState.TerritoryType);
 
-    private void OnTerritoryChanged(uint obj)
+    private void OnTerritoryChanged(ushort obj)
     {
         Entry.Shown = false;
         if(C.EnableDtrBar && S.InstanceHandler.GetInstance() > 0)

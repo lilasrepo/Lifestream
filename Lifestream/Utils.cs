@@ -53,7 +53,7 @@ internal static unsafe partial class Utils
         if(TryGetAddonMaster<AddonMaster.SelectOk>(out var m) && m.IsAddonReady)
         {
             var text = m.Text;
-            return text.RemoveWhitespaces().Contains(Error.Get(13206).Unknown0.GetText(true).RemoveWhitespaces(), StringComparison.OrdinalIgnoreCase);
+            return text.RemoveWhitespaces().Contains(Svc.Data.GetExcelSheet<Lumina.Excel.Sheets.Error>()!.GetRow(13206)!.Unknown0.GetText(true).RemoveWhitespaces(), StringComparison.OrdinalIgnoreCase);
         }
         return false;
     }
@@ -486,8 +486,8 @@ internal static unsafe partial class Utils
             Houses.Private_Cottage_Shirogane, Houses.Private_House_Shirogane, Houses.Private_Mansion_Shirogane,
             Houses.Private_Cottage_The_Goblet, Houses.Private_House_The_Goblet, Houses.Private_Mansion_The_Goblet,
             Houses.Private_Cottage_The_Lavender_Beds, Houses.Private_House_The_Lavender_Beds, Houses.Private_Mansion_The_Lavender_Beds,
-            Houses.Private_Cottage_Minimalist, Houses.Private_House_Minimalist, Houses.Private_Mansion_Minimalist,
-            Houses.Private_Cottage_Minimalist_Dark, Houses.Private_House_Minimalist_Dark, Houses.Private_Mansion_Minimalist_Dark
+            Houses.Private_Cottage_Minimalist, Houses.Private_House_Minimalist, Houses.Private_Mansion_Minimalist
+            // 7.5-only: Houses.Private_Cottage_Minimalist_Dark, Houses.Private_House_Minimalist_Dark, Houses.Private_Mansion_Minimalist_Dark
             );
     }
 
@@ -948,15 +948,15 @@ internal static unsafe partial class Utils
             if(field == null)
             {
                 HashSet<uint> ret = [];
-                foreach(var x in EObjName.Values)
+                foreach(var x in Svc.Data.GetExcelSheet<EObjName>()!)
                 {
                     //2000151	Aethernet shard	0	Aethernet shards	0	1	1	0	0
                     //2014665	aetheryte shard	0	aetheryte shards	0	1	1	0	0
                     if(x.Singular.GetText().EqualsAny(
-                        EObjName.Get(2000151).Singular.GetText(),
-                        EObjName.Get(2014665).Singular.GetText(),
-                        EObjName.Get(2014664).Singular.GetText(),        // KR: Occult Aetheryte in Occult Crescent
-                        EObjName.Get(2003395).Singular.GetText()         // KR: Aethernet Shard in housing area
+                        Svc.Data.GetExcelSheet<EObjName>()!.GetRow(2000151)!.Singular.GetText(),
+                        Svc.Data.GetExcelSheet<EObjName>()!.GetRow(2014665)!.Singular.GetText(),
+                        Svc.Data.GetExcelSheet<EObjName>()!.GetRow(2014664)!.Singular.GetText(),        // KR: Occult Aetheryte in Occult Crescent
+                        Svc.Data.GetExcelSheet<EObjName>()!.GetRow(2003395)!.Singular.GetText()         // KR: Aethernet Shard in housing area
                     ))
                     {
                         ret.Add(x.RowId);
@@ -969,10 +969,10 @@ internal static unsafe partial class Utils
                         //2000151	Aethernet shard	0	Aethernet shards	0	1	1	0	0
                         //2014665	aetheryte shard	0	aetheryte shards	0	1	1	0	0
                         if(x.Singular.GetText().EqualsAny(
-                            EObjName.Get(2000151, ClientLanguage.English).Singular.GetText(),
-                            EObjName.Get(2014665, ClientLanguage.English).Singular.GetText(),
-                            EObjName.Get(2014664, ClientLanguage.English).Singular.GetText(),        // KR: Occult Aetheryte in Occult Crescent
-                            EObjName.Get(2003395, ClientLanguage.English).Singular.GetText()         // KR: Aethernet Shard in housing area
+                            Svc.Data.GetExcelSheet<EObjName>(ClientLanguage.English)!.GetRow(2000151)!.Singular.GetText(),
+                            Svc.Data.GetExcelSheet<EObjName>(ClientLanguage.English)!.GetRow(2014665)!.Singular.GetText(),
+                            Svc.Data.GetExcelSheet<EObjName>(ClientLanguage.English)!.GetRow(2014664)!.Singular.GetText(),        // KR: Occult Aetheryte in Occult Crescent
+                            Svc.Data.GetExcelSheet<EObjName>(ClientLanguage.English)!.GetRow(2003395)!.Singular.GetText()         // KR: Aethernet Shard in housing area
                         ))
                         {
                             ret.Add(x.RowId);
@@ -1233,7 +1233,7 @@ internal static unsafe partial class Utils
         if(entry.PropertyType == PropertyType.Apartment)
         {
             // Better logic for subdivision detection
-            if(!(entry.ApartmentSubdivision == ((h->IsInside() ? h->GetCurrentHouseId().Unit.ApartmentDivision : h->GetCurrentDivision() - 1) == 1))) return false;
+            if(!(entry.ApartmentSubdivision == ((h->GetCurrentDivision() - 1) == 1))) return false; // TODO(api12): GetCurrentHouseId is game-7.5-only
             return entry.Apartment == h->GetCurrentRoom();
         }
         return false;
@@ -1253,7 +1253,7 @@ internal static unsafe partial class Utils
         }
         else
         {
-            return entry.ApartmentSubdivision == ((h->IsInside() ? h->GetCurrentHouseId().Unit.ApartmentDivision : h->GetCurrentDivision() - 1) == 1);
+            return entry.ApartmentSubdivision == ((h->GetCurrentDivision() - 1) == 1); // TODO(api12): GetCurrentHouseId is game-7.5-only
         }
     }
 
@@ -1781,7 +1781,7 @@ internal static unsafe partial class Utils
         {
             try
             {
-                var addon = (AtkUnitBase*)Svc.GameGui.GetAddonByName("SelectYesno", i).Address;
+                var addon = (AtkUnitBase*)Svc.GameGui.GetAddonByName("SelectYesno", i);
                 if(addon == null) return null;
                 if(IsAddonReady(addon))
                 {
@@ -1815,9 +1815,9 @@ internal static unsafe partial class Utils
             for(var i = 3; i <= 10; i++)
             {
                 var str = stringArray->StringArray[i];
-                if(str.HasValue)
+                if(str != null)
                 {
-                    var worldName = MemoryHelper.ReadStringNullTerminated((nint)str.Value).Trim();
+                    var worldName = MemoryHelper.ReadStringNullTerminated((nint)str).Trim();
                     if(worldName.IsNullOrEmpty()) break;
                     ret.Add(worldName);
                 }

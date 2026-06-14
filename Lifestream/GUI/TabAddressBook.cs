@@ -1,4 +1,4 @@
-﻿using ECommons.Configuration;
+using ECommons.Configuration;
 using ECommons.ExcelServices;
 using ECommons.ExcelServices.TerritoryEnumeration;
 using ECommons.GameHelpers;
@@ -222,7 +222,7 @@ public static unsafe class TabAddressBook
                     }
                     if(entry.Alias != "")
                     {
-                        ImGui.MenuItem($"Enable Alias: {entry.Alias}", ref entry.AliasEnabled);
+                        ImGui.MenuItem($"Enable Alias: {entry.Alias}", "", ref entry.AliasEnabled);
                     }
                     if(ImGui.MenuItem("Edit..."))
                     {

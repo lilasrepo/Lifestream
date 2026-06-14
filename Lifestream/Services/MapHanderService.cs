@@ -1,4 +1,4 @@
-﻿using Dalamud.Game.Addon.Lifecycle;
+using Dalamud.Game.Addon.Lifecycle;
 using Dalamud.Game.Addon.Lifecycle.AddonArgTypes;
 using Dalamud.Memory;
 using ECommons.Interop;
@@ -47,8 +47,8 @@ public unsafe class MapHanderService : IDisposable
                 data: {data.ToHexString()}
                 CursorTarget: {(addon->CursorTarget == null?"-": addon->CursorTarget->NodeId)}
                 """);*/
-            var isLeftClicked = *(byte*)(evt.AtkEventData + 6) == 0;
-            var isGamePadClick = *(byte*)(evt.AtkEventData + 17) == 1;
+            var isLeftClicked = false; // TODO(api12): AddonReceiveEventArgs.AtkEventData is API15-only; flag-marker click pickup disabled
+            var isGamePadClick = false; // TODO(api12): AddonReceiveEventArgs.AtkEventData is API15-only
             var isGamePadInput = (int)evt.AtkEventType == (int)AtkEventType.InputBaseInputReceived;
             var isMouseUp = (int)evt.AtkEventType == (int)AtkEventType.MouseUp;
             if (isMouseUp && isLeftClicked || isGamePadInput && isGamePadClick)

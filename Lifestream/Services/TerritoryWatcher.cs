@@ -1,4 +1,4 @@
-﻿using ECommons.ExcelServices;
+using ECommons.ExcelServices;
 using ECommons.ExcelServices.TerritoryEnumeration;
 using ECommons.GameHelpers;
 using ECommons.LazyDataHelpers;
@@ -26,7 +26,7 @@ public static class TerritoryWatcher
 
     public static bool IsDataReliable() => LastHousingOutdoorTerritory != 0;
 
-    private static void ClientState_TerritoryChanged(uint obj)
+    private static void ClientState_TerritoryChanged(ushort obj)
     {
         if(Utils.IsTerritoryResidentialDistrict(obj))
         {
@@ -37,7 +37,7 @@ public static class TerritoryWatcher
 
     public static ushort GetRealTerritoryType()
     {
-        if(Svc.ClientState.TerritoryType.EqualsAny<uint>(Houses.Private_Cottage_Empyreum, Houses.Private_Cottage_Mist, Houses.Private_Cottage_Shirogane, Houses.Private_Cottage_The_Goblet, Houses.Private_Cottage_The_Lavender_Beds, Houses.Private_Cottage_Minimalist, Houses.Private_Cottage_Minimalist_Dark))
+        if(((uint)Svc.ClientState.TerritoryType).EqualsAny<uint>(Houses.Private_Cottage_Empyreum, Houses.Private_Cottage_Mist, Houses.Private_Cottage_Shirogane, Houses.Private_Cottage_The_Goblet, Houses.Private_Cottage_The_Lavender_Beds, Houses.Private_Cottage_Minimalist /* , Houses.Private_Cottage_Minimalist_Dark — 7.5-only */))
         {
             return LastHousingOutdoorTerritory switch
             {
@@ -49,7 +49,7 @@ public static class TerritoryWatcher
                 _ => (ushort)Svc.ClientState.TerritoryType
             };
         }
-        if(Svc.ClientState.TerritoryType.EqualsAny<uint>(Houses.Private_House_Empyreum, Houses.Private_House_Mist, Houses.Private_House_Shirogane, Houses.Private_House_The_Goblet, Houses.Private_House_The_Lavender_Beds, Houses.Private_House_Minimalist, Houses.Private_House_Minimalist_Dark))
+        if(((uint)Svc.ClientState.TerritoryType).EqualsAny<uint>(Houses.Private_House_Empyreum, Houses.Private_House_Mist, Houses.Private_House_Shirogane, Houses.Private_House_The_Goblet, Houses.Private_House_The_Lavender_Beds, Houses.Private_House_Minimalist /* , Houses.Private_House_Minimalist_Dark — 7.5-only */))
         {
             return LastHousingOutdoorTerritory switch
             {
@@ -61,7 +61,7 @@ public static class TerritoryWatcher
                 _ => (ushort)Svc.ClientState.TerritoryType
             };
         }
-        if(Svc.ClientState.TerritoryType.EqualsAny<uint>(Houses.Private_Mansion_Empyreum, Houses.Private_Mansion_Mist, Houses.Private_Mansion_Shirogane, Houses.Private_Mansion_The_Goblet, Houses.Private_Mansion_The_Lavender_Beds, Houses.Private_Mansion_Minimalist, Houses.Private_Mansion_Minimalist_Dark))
+        if(((uint)Svc.ClientState.TerritoryType).EqualsAny<uint>(Houses.Private_Mansion_Empyreum, Houses.Private_Mansion_Mist, Houses.Private_Mansion_Shirogane, Houses.Private_Mansion_The_Goblet, Houses.Private_Mansion_The_Lavender_Beds, Houses.Private_Mansion_Minimalist /* , Houses.Private_Mansion_Minimalist_Dark — 7.5-only */))
         {
             return LastHousingOutdoorTerritory switch
             {

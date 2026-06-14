@@ -113,7 +113,7 @@ public class WotsitManager : IDisposable
         MaybeTryInit(false);
     }
 
-    private void TerritoryChanged(uint territory)
+    private void TerritoryChanged(ushort territory)
     {
         PluginLog.Debug($"WotsitManager: Territory changed to {territory}, attempting re-registration");
         MaybeTryInit(false);

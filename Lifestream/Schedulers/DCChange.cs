@@ -1,4 +1,4 @@
-﻿using Dalamud.Utility;
+using Dalamud.Utility;
 using ECommons.Automation;
 using ECommons.Automation.UIInput;
 using ECommons.ExcelServices;
@@ -26,7 +26,7 @@ internal static unsafe class DCChange
     internal static bool? WaitUntilNotBusy()
     {
         if(!Player.Available) return false;
-        return Player.Object.CastInfo.ActionId == 0 && !IsOccupied() && Player.Object.IsTargetable;
+        return Player.BattleChara->CastInfo.ActionId == 0 && !IsOccupied() && Player.Object.IsTargetable;
     }
 
     internal static bool? Logout()
@@ -105,7 +105,7 @@ internal static unsafe class DCChange
     {
         {
             // Select Character
-            var addon = (AtkUnitBase*)Svc.GameGui.GetAddonByName("_CharaSelectListMenu", 1).Address;
+            var addon = (AtkUnitBase*)Svc.GameGui.GetAddonByName("_CharaSelectListMenu", 1);
             PluginLog.Debug($"Select1");
             if(addon == null) return false;
             PluginLog.Debug($"Select1-1");
@@ -121,7 +121,7 @@ internal static unsafe class DCChange
                     PluginLog.Debug($"[DCChange] Selecting character index {index}");
                     Callback.Fire(addon, false, (int)29, (int)0, (int)index);
                 }
-                var nextAddon = (AtkUnitBase*)Svc.GameGui.GetAddonByName("SelectYesno", 1).Address;
+                var nextAddon = (AtkUnitBase*)Svc.GameGui.GetAddonByName("SelectYesno", 1);
                 return nextAddon != null;
             }
             else
@@ -473,7 +473,7 @@ internal static unsafe class DCChange
 
     internal static bool? SelectServiceAccount(int account)
     {
-        var dcMenu = (AtkUnitBase*)Svc.GameGui.GetAddonByName("TitleDCWorldMap", 1).Address;
+        var dcMenu = (AtkUnitBase*)Svc.GameGui.GetAddonByName("TitleDCWorldMap", 1);
         if(dcMenu != null) dcMenu->Close(true);
         if(TryGetAddonByName<AtkUnitBase>("_CharaSelectWorldServer", out _))
         {
