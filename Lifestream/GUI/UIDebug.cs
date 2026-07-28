@@ -396,7 +396,7 @@ internal static unsafe class UIDebug
         {
             if(ThreadLoadImageHandler.TryGetTextureWrap("https://github.com/FFXIV-CombatReborn/RotationSolverReborn/blob/main/Images/Logo.png?raw=true", out var tex))
             {
-                ImGui.Image(tex.ImGuiHandle, new(-1));
+                ImGui.Image(tex.Handle, new(-1));
             }
         }
         if(ImGui.CollapsingHeader("IPC test - travel from chara select screen"))
@@ -664,7 +664,7 @@ internal static unsafe class UIDebug
                 if(ThreadLoadImageHandler.TryGetIconTextureWrap(marker.IconId, false, out var w))
                 {
                     ImGui.SameLine();
-                    ImGui.Image(w.ImGuiHandle, new(30f));
+                    ImGui.Image(w.Handle, new(30f));
                 }
             }
         }

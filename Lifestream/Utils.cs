@@ -1781,7 +1781,7 @@ internal static unsafe partial class Utils
         {
             try
             {
-                var addon = (AtkUnitBase*)Svc.GameGui.GetAddonByName("SelectYesno", i);
+                var addon = (AtkUnitBase*)Svc.GameGui.GetAddonByName("SelectYesno", i).Address;
                 if(addon == null) return null;
                 if(IsAddonReady(addon))
                 {
@@ -1817,7 +1817,7 @@ internal static unsafe partial class Utils
                 var str = stringArray->StringArray[i];
                 if(str != null)
                 {
-                    var worldName = MemoryHelper.ReadStringNullTerminated((nint)str).Trim();
+                    var worldName = MemoryHelper.ReadStringNullTerminated((nint)str.Value).Trim();
                     if(worldName.IsNullOrEmpty()) break;
                     ret.Add(worldName);
                 }
