@@ -1,11 +1,11 @@
-# Lifestream（繁中移植版 · TC12） / Traditional-Chinese Port
+# Lifestream（繁中移植版 · TC13） / Traditional-Chinese Port
 
 > 加速以太網（Aethernet）移動與跨服切換。<br>
 > Speeds up Aethernet travel and World visiting.
 
-**繁體中文**：這是 **[Lifestream](https://github.com/NightmareXIV/Lifestream)** 的繁體中文客戶端移植版，對應 **FFXIV 7.1 / yanmucorp Dalamud API12（.NET 9）**。本專案僅做相容性移植，**非官方、非原作維護**；所有原始功能與設計著作權歸原作者 **NightmareXIV**。
+**繁體中文**：這是 **[Lifestream](https://github.com/NightmareXIV/Lifestream)** 的繁體中文客戶端移植版，對應 **FFXIV 7.20 / yanmucorp Dalamud API13（.NET 9）**。本專案僅做相容性移植，**非官方、非原作維護**；所有原始功能與設計著作權歸原作者 **NightmareXIV**。
 
-**English**: A Traditional-Chinese-client port of **[Lifestream](https://github.com/NightmareXIV/Lifestream)** targeting **FFXIV 7.1 / yanmucorp Dalamud API12 (.NET 9)**. Compatibility port only — **unofficial and not maintained by the original author**. All original work © **NightmareXIV**.
+**English**: A Traditional-Chinese-client port of **[Lifestream](https://github.com/NightmareXIV/Lifestream)** targeting **FFXIV 7.20 / yanmucorp Dalamud API13 (.NET 9)**. Compatibility port only — **unofficial and not maintained by the original author**. All original work © **NightmareXIV**.
 
 ---
 
@@ -24,7 +24,7 @@ One click to teleport to any World or aethernet destination, and click aetheryte
    ```
    https://raw.githubusercontent.com/lilasrepo/DalamudPlugins/main/pluginmaster.json
    ```
-4. 輸入 `/xlplugins`，搜尋 **Lifestream (TC12)** → 安裝 → 啟用。
+4. 輸入 `/xlplugins`，搜尋 **Lifestream (TC13)** → 安裝 → 啟用。
 
 **English**
 1. Launch the Traditional-Chinese client with **XIVTCLauncher**.
@@ -33,14 +33,14 @@ One click to teleport to any World or aethernet destination, and click aetheryte
    ```
    https://raw.githubusercontent.com/lilasrepo/DalamudPlugins/main/pluginmaster.json
    ```
-4. Type `/xlplugins`, search **Lifestream (TC12)** → Install → Enable.
+4. Type `/xlplugins`, search **Lifestream (TC13)** → Install → Enable.
 
 ## 對應版本 / Compatibility
 
 | 項目 / Item | 版本 / Version |
 |---|---|
-| 遊戲 / Game | FFXIV 7.1（繁中客戶端 / TC client） |
-| Dalamud | yanmucorp API12（.NET 9） |
+| 遊戲 / Game | FFXIV 7.20（繁中客戶端 / TC client） |
+| Dalamud | yanmucorp API13（.NET 9） |
 | 移植自上游 / Ported from upstream | v2.5.4.9 |
 
 ## 原作與授權 / Credits & License
