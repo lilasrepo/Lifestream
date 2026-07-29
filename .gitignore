@@ -33,6 +33,15 @@ bld/
 [Ll]og/
 [Ll]ogs/
 
+# TC port: OtterGui vendors its logger at OtterGui/Log/Logger.cs, and the [Ll]og/ rule
+# above (upstream's, meant for build logs) swallows it. Every refresh then dropped the
+# file and Lifestream failed to build with CS0234 "'Log' does not exist in the namespace
+# 'OtterGui'". The three other plugins that vendor OtterGui (Artisan, AutoRetainer,
+# GatherBuddyReborn) track it fine -- only this tree has the rule. Re-include it so the
+# file is version-controlled rather than re-fetched by hand after every refresh.
+!OtterGui/Log/
+!OtterGui/Log/**
+
 # Visual Studio 2015/2017 cache/options directory
 .vs/
 # Uncomment if you have tasks that create the project's static files in wwwroot

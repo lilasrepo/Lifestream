@@ -1,6 +1,5 @@
 ﻿using Dalamud.Game.ClientState.Objects.Types;
 using ECommons.MathHelpers;
-using FFXIVClientStructs.FFXIV.Application.Network.WorkDefinitions;
 using Lifestream.Data;
 using Lumina.Excel.Sheets;
 
@@ -72,21 +71,25 @@ public sealed class CustomAethernet
             new(new(306.9f, 305.7f), 1252, GetPlaceName(4930), BaseOccultId+3, new(27.6f, 27.5f)), //4940	Eldergrowth	1	Eldergrowth	0	0	1	0	0		0	0	0
             new(new(-384.1f, 281.4f), 1252, GetPlaceName(4947), BaseOccultId+4, new(13.7f, 27f)), //4947	Stonemarsh	1	Stonemarsh	0	0	1	0	1		0	0	0
             ], [Lang.AethernetShardTooltipPlaceholder]),
-        // TODO(api12): Cosmic Exploration moon territories (1237/1291/1310) require WKSAetheryte
-        // Lumina sheet which is game 7.5-only. TC client at 7.1 doesn't have this content.
-        // Re-enable when TC client patches to 7.5+.
+        // TAKE OURS (re-verified 2026-07-29 at api13 / TC game v7.20):
+        //  - moon territories 1237/1291/1310 need the WKSAetheryte Lumina sheet. Reflecting
+        //    TC_ok/_dalamud_api13/Lumina.Excel.dll shows 55 WKS* sheet types but NO WKSAetheryte,
+        //    so WKSAetheryte.Get(n) has nothing to bind to. This is an API-axis wall and it did
+        //    NOT move at api13 -- recheck by reflection, not by assuming, at the next generation.
+        //  - territory 1346 is Occult Crescent, international patch 7.25 content. TC is on v7.20
+        //    (7.2 content on the 7.3 system), so those PlaceName rows are absent too.
     };
 
     public Dictionary<uint, string> CustomAetheryteNames
     {
         get
         {
-            if(field == null)
+            if (field == null)
             {
                 field = [];
-                foreach(var x in S.Data.CustomAethernet.ZoneInfo)
+                foreach (var x in S.Data.CustomAethernet.ZoneInfo)
                 {
-                    foreach(var a in x.Value.Aetherytes)
+                    foreach (var a in x.Value.Aetherytes)
                     {
                         field.Add(a.ID, a.Name);
                     }
@@ -105,7 +108,7 @@ public sealed class CustomAethernet
 
     public void Tick()
     {
-        if(Svc.ClientState.LocalPlayer != null && ZoneInfo.ContainsKey(P.Territory))
+        if (Svc.ClientState.LocalPlayer != null && ZoneInfo.ContainsKey(P.Territory))
         {
             UpdateActiveAetheryte();
         }
@@ -118,12 +121,12 @@ public sealed class CustomAethernet
     public void UpdateActiveAetheryte()
     {
         var a = Utils.GetValidAetheryte();
-        if(a != null)
+        if (a != null)
         {
             var aetheryte = GetFromIGameObject(a);
-            if(aetheryte != null)
+            if (aetheryte != null)
             {
-                if(ActiveAetheryte == null)
+                if (ActiveAetheryte == null)
                 {
                     S.Gui.Overlay.IsOpen = true;
                 }
@@ -138,13 +141,14 @@ public sealed class CustomAethernet
 
     public CustomAetheryte? GetFromIGameObject(IGameObject obj)
     {
-        if(obj == null) return null;
+        if (obj == null)
+            return null;
         var pos2 = obj.Position.ToVector2();
-        if(ZoneInfo.TryGetValue(P.Territory, out var result))
+        if (ZoneInfo.TryGetValue(P.Territory, out var result))
         {
-            foreach(var l in result.Aetherytes)
+            foreach (var l in result.Aetherytes)
             {
-                if(Vector2.Distance(l.Position, pos2) < 10f)
+                if (Vector2.Distance(l.Position, pos2) < 10f)
                 {
                     return l;
                 }
