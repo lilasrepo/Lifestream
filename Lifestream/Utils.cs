@@ -957,7 +957,8 @@ internal static unsafe partial class Utils
                         Svc.Data.GetExcelSheet<EObjName>()!.GetRow(2000151)!.Singular.GetText(),
                         Svc.Data.GetExcelSheet<EObjName>()!.GetRow(2014665)!.Singular.GetText(),
                         Svc.Data.GetExcelSheet<EObjName>()!.GetRow(2014664)!.Singular.GetText(),        // KR: Occult Aetheryte in Occult Crescent
-                        Svc.Data.GetExcelSheet<EObjName>()!.GetRow(2003395)!.Singular.GetText()         // KR: Aethernet Shard in housing area
+                        Svc.Data.GetExcelSheet<EObjName>()!.GetRow(2003395)!.Singular.GetText(),         // KR: Aethernet Shard in housing area
+                        Svc.Data.GetExcelSheet<EObjName>()!.GetRow(2011160)!.Singular.GetText()         // Bozjan Aetheryte (added upstream 2026-08)
                     ))
                     {
                         ret.Add(x.RowId);
@@ -973,7 +974,8 @@ internal static unsafe partial class Utils
                             Svc.Data.GetExcelSheet<EObjName>(ClientLanguage.English)!.GetRow(2000151)!.Singular.GetText(),
                             Svc.Data.GetExcelSheet<EObjName>(ClientLanguage.English)!.GetRow(2014665)!.Singular.GetText(),
                             Svc.Data.GetExcelSheet<EObjName>(ClientLanguage.English)!.GetRow(2014664)!.Singular.GetText(),        // KR: Occult Aetheryte in Occult Crescent
-                            Svc.Data.GetExcelSheet<EObjName>(ClientLanguage.English)!.GetRow(2003395)!.Singular.GetText()         // KR: Aethernet Shard in housing area
+                            Svc.Data.GetExcelSheet<EObjName>(ClientLanguage.English)!.GetRow(2003395)!.Singular.GetText(),         // KR: Aethernet Shard in housing area
+                            Svc.Data.GetExcelSheet<EObjName>(ClientLanguage.English)!.GetRow(2011160)!.Singular.GetText()         // Bozjan Aetheryte (added upstream 2026-08)
                         ))
                         {
                             ret.Add(x.RowId);

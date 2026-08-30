@@ -1,4 +1,4 @@
-﻿using Dalamud.Game.ClientState.Objects.Types;
+using Dalamud.Game.ClientState.Objects.Types;
 using ECommons.MathHelpers;
 using Lifestream.Data;
 using Lumina.Excel.Sheets;
@@ -43,25 +43,25 @@ public sealed class CustomAethernet
             new(new(114.3f, -107.4f), 886, GetPlaceName(3645), BaseFirmamentId+7), //The Risensong Quarter
         ], 4.56f),
         [732] = new([ //eureka anemos
-            new(new(-138.9f, 543.2f), 732, GetPlaceName(2415), BaseEurekaId), //Port Surgate (2415),  (0), 
-            new(new(-372.1f, -458.7f), 732, GetPlaceName(2429), BaseEurekaId+1), //Klauser's Peace (2421), Abandoned Laboratory (2429), 
-            new(new(435.5f, -48.1f), 732, GetPlaceName(2436), BaseEurekaId+2), //The Val River Swale (2419), Windtorn Cabin (2436), 
+            new(new(-138.9f, 543.2f), 732, GetPlaceName(2415), BaseEurekaId), //Port Surgate (2415),  (0),
+            new(new(-372.1f, -458.7f), 732, GetPlaceName(2429), BaseEurekaId+1), //Klauser's Peace (2421), Abandoned Laboratory (2429),
+            new(new(435.5f, -48.1f), 732, GetPlaceName(2436), BaseEurekaId+2), //The Val River Swale (2419), Windtorn Cabin (2436),
         ]),
         [763] = new([ //eureka pagos
-            new(new(-893.7f, 159.0f), 763, GetPlaceName(2463), BaseEurekaId+10), //Icepoint (2463),  (0), 
-            new(new(91.1f, 303.2f), 763, GetPlaceName(2474), BaseEurekaId+11), //Eureka Pagos (2462), Vlondette's Retreat (2474), 
-            new(new(-707.1f, -318.9f), 763, GetPlaceName(2472), BaseEurekaId+12), //Eureka Pagos (2462), Geothermal Studies (2472), 
-            new(new(346.0f, -289.7f), 763, GetPlaceName(2473), BaseEurekaId+13), //Eureka Pagos (2462), Gravitational Studies (2473), 
+            new(new(-893.7f, 159.0f), 763, GetPlaceName(2463), BaseEurekaId+10), //Icepoint (2463),  (0),
+            new(new(91.1f, 303.2f), 763, GetPlaceName(2474), BaseEurekaId+11), //Eureka Pagos (2462), Vlondette's Retreat (2474),
+            new(new(-707.1f, -318.9f), 763, GetPlaceName(2472), BaseEurekaId+12), //Eureka Pagos (2462), Geothermal Studies (2472),
+            new(new(346.0f, -289.7f), 763, GetPlaceName(2473), BaseEurekaId+13), //Eureka Pagos (2462), Gravitational Studies (2473),
             ]),
         [795] = new([ //eureka pyros
-            new(new(-253.5f, 146.8f), 795, GetPlaceName(2531), BaseEurekaId+20), //Northpoint (2531),  (0), 
-            new(new(125.7f, 795.3f), 795, GetPlaceName(2540), BaseEurekaId+21), //Southwestern Ice Needles (2534), The Dragon Star Observatory (2540), 
-            new(new(127.9f, -196.1f), 795, GetPlaceName(2541), BaseEurekaId+22), //Bonfire (2536), The Firing Chamber (2541), 
-            new(new(-443.4f, -622.7f), 795, GetPlaceName(2542), BaseEurekaId+23), //West Flamerock (2537), Carbonatite Quarry (2542), 
+            new(new(-253.5f, 146.8f), 795, GetPlaceName(2531), BaseEurekaId+20), //Northpoint (2531),  (0),
+            new(new(125.7f, 795.3f), 795, GetPlaceName(2540), BaseEurekaId+21), //Southwestern Ice Needles (2534), The Dragon Star Observatory (2540),
+            new(new(127.9f, -196.1f), 795, GetPlaceName(2541), BaseEurekaId+22), //Bonfire (2536), The Firing Chamber (2541),
+            new(new(-443.4f, -622.7f), 795, GetPlaceName(2542), BaseEurekaId+23), //West Flamerock (2537), Carbonatite Quarry (2542),
             ]),
         [827] = new([ //eureka hydatos
-            new(new(-61.7f, -875.6f), 827, GetPlaceName(2876), BaseEurekaId+30), //Central Point (2876),  (0), 
-            new(new(-587.3f, -148.4f), 827, GetPlaceName(2891), BaseEurekaId+31), //The West Val River Bank (2877), Unverified Research (2891), 
+            new(new(-61.7f, -875.6f), 827, GetPlaceName(2876), BaseEurekaId+30), //Central Point (2876),  (0),
+            new(new(-587.3f, -148.4f), 827, GetPlaceName(2891), BaseEurekaId+31), //The West Val River Bank (2877), Unverified Research (2891),
             new(new(781.1f, -417.5f), 827, GetPlaceName(2892), BaseEurekaId+32), //The East Val River Bank (2879), Dormitory (2892),
             ]),
         [1252] = new([
@@ -70,7 +70,7 @@ public sealed class CustomAethernet
             new(new(-358.1f, -121.0f), 1252, GetPlaceName(4929), BaseOccultId++, new(14.2f, 19f)), //4939	Crystallized Caverns	1	crystallized caverns	0	0	1	0	0		0	0	0
             new(new(306.9f, 305.7f), 1252, GetPlaceName(4930), BaseOccultId++, new(27.6f, 27.5f)), //4940	Eldergrowth	1	Eldergrowth	0	0	1	0	0		0	0	0
             new(new(-384.1f, 281.4f), 1252, GetPlaceName(4947), BaseOccultId++, new(13.7f, 27f)), //4947	Stonemarsh	1	Stonemarsh	0	0	1	0	1		0	0	0
-            ], [Lang.AethernetShardTooltipPlaceholder]),
+            ], [Lang.AethernetShardTooltip]),
         // TAKE OURS (re-verified 2026-08-01 at api13 / TC game v7.20):
         //  - moon territories 1237/1291/1310 need the WKSAetheryte Lumina sheet. Reflecting
         //    TC_ok/_dalamud_api13/Lumina.Excel.dll shows 55 WKS* sheet types but NO WKSAetheryte,
