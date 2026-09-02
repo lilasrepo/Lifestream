@@ -1236,7 +1236,8 @@ internal static unsafe partial class Utils
         if(entry.PropertyType == PropertyType.Apartment)
         {
             // Better logic for subdivision detection
-            if(!(entry.ApartmentSubdivision == ((h->GetCurrentDivision() - 1) == 1))) return false; // TODO(api12): GetCurrentHouseId is game-7.5-only
+            // porting-note(api13): restored 2026-09-02 — HousingManager.GetCurrentHouseId exists in CS 6966
+            if(!(entry.ApartmentSubdivision == ((h->IsInside() ? h->GetCurrentHouseId().Unit.ApartmentDivision : h->GetCurrentDivision() - 1) == 1))) return false;
             return entry.Apartment == h->GetCurrentRoom();
         }
         return false;
@@ -1256,7 +1257,7 @@ internal static unsafe partial class Utils
         }
         else
         {
-            return entry.ApartmentSubdivision == ((h->GetCurrentDivision() - 1) == 1); // TODO(api12): GetCurrentHouseId is game-7.5-only
+            return entry.ApartmentSubdivision == ((h->IsInside() ? h->GetCurrentHouseId().Unit.ApartmentDivision : h->GetCurrentDivision() - 1) == 1);
         }
     }
 
@@ -1956,5 +1957,15 @@ internal static unsafe partial class Utils
     internal static void MigrateConfigButtonWidthToButtonWidthArray()
     {
         C.ButtonWidthArray = [C.ButtonWidth, C.ButtonWidth, C.ButtonWidth];
+    }
+
+    public static bool IsLoggingOutInstant(uint territoryType)
+    {
+        if(Svc.Data.GetExcelSheet<TerritoryType>().TryGetRow(territoryType, out var sheet))
+        {
+            return sheet.TerritoryIntendedUse.Value.DisableLogoutTimer;
+        }
+
+        return false;
     }
 }

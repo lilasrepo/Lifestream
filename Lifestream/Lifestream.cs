@@ -516,7 +516,7 @@ public unsafe class Lifestream : IDalamudPlugin
                 TaskRemoveAfkStatus.Enqueue();
                 if(type != DCVType.Unknown)
                 {
-                    if(Config.TeleportToGatewayBeforeLogout && !(TerritoryInfo.Instance()->InSanctuary || ExcelTerritoryHelper.IsSanctuary(P.Territory)) && !(currentDC == homeDC && Player.HomeWorld != Player.CurrentWorld))
+                    if(Config.TeleportToGatewayBeforeLogout && !(TerritoryInfo.Instance()->InSanctuary || Utils.IsLoggingOutInstant(P.Territory)) && !(currentDC == homeDC && Player.HomeWorld != Player.CurrentWorld))
                     {
                         TaskTpToAethernetDestination.Enqueue(gateway.Value.AdjustGateway());
                     }
@@ -715,8 +715,9 @@ public unsafe class Lifestream : IDalamudPlugin
                 return;
             }
 
-            // API12: AtkComponentTextInput.OwnerAddon is game-7.5-only; use only ContainingAddon2
-            var addon = component->ContainingAddon2;
+            // porting-note(api13): restored 2026-09-02 — OwnerAddon and EvaluatedString both exist in CS 6966
+            var addon = component->OwnerAddon;
+            if(addon == null) addon = component->ContainingAddon2;
             if(addon == null || addon->NameString != "ChatLog")
             {
                 if(S.SearchHelperOverlay.IsOpen)
@@ -726,7 +727,7 @@ public unsafe class Lifestream : IDalamudPlugin
                 return;
             }
 
-            var currentText = ""; // TODO(api12): AtkComponentTextInput.EvaluatedString is game-7.5-only; /li search helper disabled
+            var currentText = component->EvaluatedString.ToString();
 
             if(currentText.StartsWith("/li", StringComparison.OrdinalIgnoreCase))
             {
